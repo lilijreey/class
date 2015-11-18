@@ -87,13 +87,8 @@ private:
 class XZ 
 {
  public:
-  virtual void area() const {
-    printf("XZ::area\n");
-  }
-
-  virtual ~XZ() {
-    printf("~XZ\n");
-  }
+  virtual void area() const { printf("XZ::area\n"); }
+  virtual ~XZ() { printf("~XZ\n"); }
 };
 
 class Ract : public XZ {
@@ -105,18 +100,9 @@ class Ract : public XZ {
   Ract(int l, int w) : l(l), w(w) {
   }
 
-  ~Ract() {
-    printf("~Ract\n");
-  }
-
-  virtual void area() const {
-    printf("Ract::area: %d\n", l*w);
-  }
-
-  void getLen() const {
-    printf("Ract::getLen: %d\n", l);
-  }
-
+  ~Ract() { printf("~Ract\n"); }
+  virtual void area() const { printf("Ract::area: %d\n", l*w); }
+  void getLen() const { printf("Ract::getLen: %d\n", l); }
 
 };
 
@@ -125,14 +111,9 @@ class Square : public Ract
  public:
   Square(int l) : Ract(l, l)
   {}
-  ~Square() {
-    printf("~Square\n");
-  }
+  ~Square() { printf("~Square\n"); }
 
-  virtual void area() const {
-    printf("Square::area: %d\n", w*w );
-  }
-
+  virtual void area() const { printf("Square::area: %d\n", w*w ); }
 };
 
 class Circle: public XZ {
