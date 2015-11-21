@@ -4,30 +4,40 @@
 
 class BirdBase
 {
- public:
-  int id=0;
- public:
-  virtual void fly() const
-  {
-    printf("BirdBase::Fly\n");
-  }
+ public: int id=0;
+  //virtual void fly() const
+  //{ printf("BirdBase::Fly\n"); }
+  virtual void fly() const =0;
+  virtual ~BirdBase() { printf("~BirdBase\n"); }
+};
 
-  virtual ~BirdBase() {
-    printf("~BirdBase\n");
+class OO : public BirdBase
+{
+ public:
+  void fly() const override final {
+    printf("OO::fly\n");
   }
 };
 
+class FN : public BirdBase {
+ public:
+  void fly() const override final {
+    printf("FN::fly\n");
+  }
+
+};
+
+//class XX : public OO
+//{
+ //public:
+  //void fly() const {
+    //printf("XX::fly\n");
+  //}
+//};
 
 class Duck :public BirdBase {
  public:
-  void fly() const {
-    printf("Duck::Fly\n");
-  }
-
-  ~Duck() {
-    printf("~Duck\n");
-  }
-
+  void fly() const { printf("Duck::Fly\n"); }
 };
 
 class Chick :public BirdBase {
@@ -53,17 +63,6 @@ class Dy:public BirdBase {
 };
 
 
-class XX : BirdBase {
- private:
-  int *_buf;
- public:
-  XX() {
-    _buf = new int(3);
-  }
-   ~XX() {
-     delete _buf;
-   }
-};
 
 class BirdFactory
 {
@@ -84,12 +83,25 @@ private:
   }
 
 };
+
 class XZ 
 {
  public:
-  virtual void area() const { printf("XZ::area\n"); }
+  XZ() {}
+  XZ(int b) :xx(b){}
+  virtual void area() const =0;
   virtual ~XZ() { printf("~XZ\n"); }
+  int xx; 
 };
+
+class Tri: public XZ {
+ public:
+};
+
+
+void XZ::area() const
+{
+}
 
 class Ract : public XZ {
  protected: 
@@ -133,17 +145,17 @@ class Circle: public XZ {
 
 int main(int argc, char *argv[])
 {
-  XZ *p = new Square(3);
-  delete p;
+  //XZ *p = new Square(3);
+  //delete p;
 
-  //BirdBase *b1 = BirdFactory::create(BirdType::DUCK);
-  //BirdBase *b2 = BirdFactory::create(BirdType::CHICK);
-  //BirdBase *b3 = BirdFactory::create(BirdType::DY);
+  BirdBase *b1 = BirdFactory::create(BirdType::DUCK);
+  BirdBase *b2 = BirdFactory::create(BirdType::CHICK);
+  BirdBase *b3 = BirdFactory::create(BirdType::DY);
 
-  //b1->fly();
-  //b2->fly();
-  //b3->fly();
-  //delete b1;
+  b1->fly();
+  b2->fly();
+  b3->fly();
+  delete b1;
   //delete b2;
   //delete b3;
 
@@ -188,5 +200,42 @@ int main(int argc, char *argv[])
   //BirdBase *b =&d;
   //b->fly();
   
+  OO o;
+  BirdBase *bb = &o;
+  printf("bb->fly\n");
+  bb->fly();
+  
+  FN f;
+  f.fly();
+  //XZ xz;
+
+  //BirdBase b;
+
+  Tri t;
+  //int override = 323;
   return 0;
 }
+
+class T {
+ public:
+ void createThread() {
+ }
+
+ void xx() {}
+};
+
+class D {
+ public:
+ void createThread() {
+ }
+ void gaga() {}
+};
+
+void test(T o) {
+  o.createThread(T);
+
+
+}
+
+
+
