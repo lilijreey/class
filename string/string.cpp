@@ -108,7 +108,7 @@ bool String::operator!=(const String &str) const
   return ! (*this == str);
 }
 
-//operator String::bool() const
-//{
-  //return not empty();
-//}
+operator String::bool() const
+{
+  return not empty();
+}

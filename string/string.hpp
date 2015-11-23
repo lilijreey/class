@@ -3,7 +3,6 @@
  * @desc  defined string class 
  */
 
-
 #include <cstdlib>
 class String 
 {
@@ -11,7 +10,6 @@ class String
    char *_buf = nullptr;
    size_t _len = 0;
    size_t _strLen=0;
-
 
  public:
   String(const char*str=nullptr);
@@ -37,7 +35,7 @@ class String
   String operator+(const String &str);
   bool operator==(const String &str) const;
   bool operator!=(const String &str) const;
-  //operator bool() const;
+  operator bool() const;
 
 
   char operator[](int i) const;
