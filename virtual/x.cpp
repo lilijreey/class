@@ -233,9 +233,8 @@ class D {
 
 void test(T o) {
   o.createThread(T);
-
-
 }
+
 
 
 
