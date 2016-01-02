@@ -26,6 +26,16 @@ struct Z {
   //b = tmp;
 //}
 
+//template <typename T>
+//void swap(T &a, T &b) ;
+//{
+  //printf("swap template\n");
+  //xxxoo(32);
+  //oooxx(false);
+  //T tmp = a;
+  //a = b;
+  //b = tmp;
+//}
 #if 0
 
 int main(int argc, char *argv[])

@@ -21,14 +21,12 @@ void swap(T &a, T &b)
   b = tmp;
 }
 
-//template <typename T>
-//void swap(T &a, T &b) ;
-//{
-  //printf("swap template\n");
-  //xxxoo(32);
-  //oooxx(false);
-  //T tmp = a;
-  //a = b;
-  //b = tmp;
-//}
+int main(int argc, char *argv[])
+{
+  int i=3, j=10;
+  swap<int>(i, j);
+  
+  return 0;
+}
+
 
