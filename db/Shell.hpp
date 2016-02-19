@@ -1,6 +1,10 @@
 #ifndef SHELL_H_
 #define SHELL_H_
 
+/*
+ * file 实现命令解析
+ */
+
 
 class Shell {
   enum N_OP {

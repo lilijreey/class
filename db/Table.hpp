@@ -14,8 +14,9 @@ struct Doc{
 class Table {
  public:
   Table(const std::string &table) ;
-  //Table(const Table&) = delete;
+  Table(const Table&) = delete;
   Table& operator=(const Table&) = delete;
+public:
 
   bool insertDoc(const std::string doc);
   void show() const;
