@@ -4,6 +4,19 @@
 
 std::map<std::string, Table> DB::_tables;
 
+bool DB::deleteTableDoc(const std::string &tableName,
+                             size_t id) {
+
+  if (not isTableExist(tableName))
+    return false;
+
+  auto it= _tables.find(tableName);
+  it->second.deleteDoc(id);
+
+
+  printf("TODO deleteTableDoc\n");
+  return true;
+}
 
 bool DB::isTableExist(const std::string &tableName) {
   return _tables.count(tableName) == 1;
@@ -16,7 +29,7 @@ bool DB::createTable(const std::string &tableName) {
 
   Table t(tableName);
   //_tables[tableName] = t;
-  _tables.insert({tableName, t});
+  _tables.insert(std::make_pair(tableName, t));
   return true;
 }
 
@@ -64,6 +77,11 @@ bool Table::insertDoc(const std::string doc) {
   size_t id = genId();
 
   _rows.insert({id, Doc(id, doc)});
+  return true;
+}
+
+bool Table::deleteDoc(size_t id) {
+  _rows.erase(id);
 
   return true;
 }

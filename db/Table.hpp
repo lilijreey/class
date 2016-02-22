@@ -14,11 +14,15 @@ struct Doc{
 class Table {
  public:
   Table(const std::string &table) ;
-  Table(const Table&) = delete;
-  Table& operator=(const Table&) = delete;
+
+  //Table(const Table&) = delete;
+  //Table& operator=(const Table&) = delete;
 public:
 
   bool insertDoc(const std::string doc);
+  bool deleteDoc(size_t id);
+
+  /** list table rows */
   void show() const;
   //delete;
   //update;
@@ -38,14 +42,17 @@ class DB {
   static bool isTableExist(const std::string &tableName);
   static bool insertTable(const std::string &tableName, 
                           const std::string &doc);
+  static bool deleteTableDoc(const std::string &tableName,
+                             size_t id);
 
   static void showTable(const std::string &tableName);
+
  private:
   static Table* getTable(const std::string &tableName);
 
 
  private:
-  static std::map<std::string, Table> _tables;
+  static std::map<std::string/*tableName*/, Table> _tables;
 };
 
 #endif

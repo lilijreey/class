@@ -25,14 +25,16 @@ class Shell {
   void parseCreateTable();
   void parseCreateTableParams();
 
-  void parseDeleteTable();
-  void parseDeleteTableParams();
+  void parseDestroyTable();
+  void parseDestroyTableParams();
 
   void parseInsertTable();
   void parseInsertTableParams();
 
   void parseShowTable();
   void parseShowTableParams();
+
+  void parseDeleteTable();
 
   bool isEnd();
 

@@ -18,23 +18,24 @@
 static bool s_isCmdEnd = false;
 void Shell::showHelp() {
   const std::string msg=
-      R"(
-Usage: command;[comands]
-comand:
-  CREATE TABLE  <table> -- create a db table
-  DESTROY TABLE <table> -- delete a table
-  SHOW TABLE  <table> -- list all of table rows
-  INSERT        <table> <data> -- insert data to table
-  DELETE        <table> <data> -- delete data from table
-  SEARCH        <table> <pattern> -- serach data
-  IMPORT        <table> [file] -- import file to table
-  EXPORT        <file> [table] -- export table to fale
-  )";
+"Usage: command;[comands]\n"
+"comand:\n"
+"  CREATE TABLE  <table> -- create a db table\n"
+"  DESTROY TABLE <table> -- delete a table\n"
+"  SHOW TABLE  <table> -- list all of table rows\n"
+"  INSERT        <table> <data> -- insert data to table\n"
+//"  UPDATE        <table> <id> -- update data from table\n"
+"  DELETE        <table> <id> -- delete data from table\n"
+"  SEARCH        <table> <pattern> -- serach data\n"
+"  IMPORT        <table> [file] -- import file to table\n"
+"  EXPORT        <file> [table] -- export table to fale\n";
+
   std::cout << msg << std::endl;
 }
 
-static void badCmd() {
-  printf("Bad command\n");
+static void badCmd(const std::string &msg="") {
+  std::cout << "Bad command " << msg << std::endl;
+  //printf("Bad command\n");
   fflush(stdin);
 }
 
@@ -142,7 +143,7 @@ void Shell::parseCreateTable() {
   parseCreateTableParams();
 }
 
-void Shell::parseDeleteTableParams() {
+void Shell::parseDestroyTableParams() {
   std::string token = getToken();
   
   if (!isEnd())
@@ -155,15 +156,47 @@ void Shell::parseDeleteTableParams() {
 }
 
 
-
+//DELETE test id
 void Shell::parseDeleteTable() {
+  std::string tableName = getToken();
+
+  ////check table is exist
+  //if (not DB::isTableExist(tableName)) {
+  //  badCmd("table not exist");
+  //  return ;
+  //}
+
+  //handler for DELETE test; 3
+  if (s_isCmdEnd) {
+    badCmd();
+    return ;
+  }
+
+  std::string idStr= getToken();
+
+  if (!isEnd())
+    badCmd();
+
+
+  //3ab32
+  int id = atoi(idStr.c_str());
+  //TODO check id is vailed
+
+  if (DB::deleteTableDoc(tableName, id))
+    printf("successed\n");
+  else
+    printf("failed\n");
+
+}
+
+void Shell::parseDestroyTable() {
   std::string token = getToken();
   //printf("--debug getToken:%s\n", token.c_str());
   if (token != "TABLE") {
     badCmd();
     return;
   }
-  parseDeleteTableParams();
+  parseDestroyTableParams();
 }
 
 
@@ -176,10 +209,11 @@ void Shell::parseCmd() {
   //printf("parseCmd\n");
   std::map<std::string, void (Shell::*)() > table{
     {"CREATE",  &Shell::parseCreateTable},
-    {"DESTROY", &Shell::parseDeleteTable},
+    {"DESTROY", &Shell::parseDestroyTable},
     {"SHOW"   , &Shell::parseShowTable},
     {"INSERT",  &Shell::parseInsertTable},
-    {"DELETE",  &Shell::parseCreateTable},
+
+    {"DELETE",  &Shell::parseDeleteTable},
     {"SEARCH",  &Shell::parseCreateTable},
     {"IMPORT",  &Shell::parseCreateTable},
     {"EXPORT",  &Shell::parseCreateTable}
@@ -194,4 +228,5 @@ void Shell::parseCmd() {
   auto fn = it->second;
   (this->*fn)();
 }
+
 
