@@ -36,6 +36,8 @@ class Shell {
 
   void parseDeleteTable();
 
+  void parseUpdateTable();
+
   bool isEnd();
 
 

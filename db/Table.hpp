@@ -7,11 +7,18 @@
 struct Doc{
   Doc(size_t id, const std::string &doc) : _key(id), _doc(doc)
   {}
-  size_t _key;
+
+
+  void update(const std::string &doc) {
+    _doc = doc;
+  }
+
+  const size_t _key;
   std::string _doc;
 };
 
 class Table {
+
  public:
   Table(const std::string &table) ;
 
@@ -19,14 +26,12 @@ class Table {
   //Table& operator=(const Table&) = delete;
 public:
 
-  bool insertDoc(const std::string doc);
+  bool insertDoc(const std::string &doc);
+  bool updateDoc(size_t id, const std::string &doc);
   bool deleteDoc(size_t id);
 
   /** list table rows */
   void show() const;
-  //delete;
-  //update;
-  //find;
 
  private:
   size_t genId();
@@ -45,7 +50,13 @@ class DB {
   static bool deleteTableDoc(const std::string &tableName,
                              size_t id);
 
+  static bool updateTableDoc(const std::string &tableName,
+                             size_t id,
+                             const std::string &value);
+
   static void showTable(const std::string &tableName);
+
+  static std::string getTableFileName(const std::string &table);
 
  private:
   static Table* getTable(const std::string &tableName);

@@ -24,7 +24,7 @@ void Shell::showHelp() {
 "  DESTROY TABLE <table> -- delete a table\n"
 "  SHOW TABLE  <table> -- list all of table rows\n"
 "  INSERT        <table> <data> -- insert data to table\n"
-//"  UPDATE        <table> <id> -- update data from table\n"
+"  UPDATE        <table> <id> <value>-- update data from table\n"
 "  DELETE        <table> <id> -- delete data from table\n"
 "  SEARCH        <table> <pattern> -- serach data\n"
 "  IMPORT        <table> [file] -- import file to table\n"
@@ -156,6 +156,34 @@ void Shell::parseDestroyTableParams() {
 }
 
 
+void Shell::parseUpdateTable() {
+  std::string tableName = getToken();
+
+  if (s_isCmdEnd) {
+    badCmd();
+    return ;
+  }
+
+  std::string idStr = getToken();
+  int id = atoi(idStr.c_str());
+  if (s_isCmdEnd) {
+    badCmd();
+    return ;
+  }
+  //TODO check id is invalied
+  
+  std::string value = getToken();
+  if (!isEnd()) {
+    return;
+    badCmd();
+  }
+
+  if (DB::updateTableDoc(tableName, id, value)) 
+    printf("successed\n");
+  else
+    printf("failed\n");
+}
+
 //DELETE test id
 void Shell::parseDeleteTable() {
   std::string tableName = getToken();
@@ -212,8 +240,11 @@ void Shell::parseCmd() {
     {"DESTROY", &Shell::parseDestroyTable},
     {"SHOW"   , &Shell::parseShowTable},
     {"INSERT",  &Shell::parseInsertTable},
-
     {"DELETE",  &Shell::parseDeleteTable},
+    {"UPDATE",  &Shell::parseUpdateTable},
+
+
+
     {"SEARCH",  &Shell::parseCreateTable},
     {"IMPORT",  &Shell::parseCreateTable},
     {"EXPORT",  &Shell::parseCreateTable}
