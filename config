@@ -1,0 +1,73 @@
+
+
+##code santi66
+#root santist
+#Host ser
+  #User zl
+  #Hostname 192.168.0.142
+  #PreferredAuthentications publickey
+  #IdentityFile ~/.ssh/ser
+
+Host xjp
+User ubuntu 
+Hostname 54.169.105.88
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/xjp.pem
+
+# root 82ab06eb
+# ##one passwd toor123456
+#Host ali
+  #User one
+  #Hostname 120.24.100.174
+  #PreferredAuthentications publickey
+  #IdentityFile ~/.ssh/ali
+
+#Host dj
+#User ubuntu
+##Hostname 172.31.30.214
+#Hostname 52.68.170.204
+#PreferredAuthentications publickey
+#IdentityFile ~/.ssh/dj
+
+#code pub4@123
+#Host s14
+  #User pub4
+  #Hostname 192.168.1.14
+  #PreferredAuthentications publickey
+  #IdentityFile ~/.ssh/s14
+ 
+
+Host s11
+User git
+Hostname 11.12.110.80
+Port 7070
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/s11_ace
+
+## code Zhize521
+Host zz
+User root
+Hostname 112.74.125.226
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/zhize
+
+## aws
+Host aws
+User ubuntu
+Hostname 52.88.139.21
+IdentityFile ~/.ssh/aws.pem
+
+## locahost
+Host localhost
+User god
+Hostname 127.0.0.1
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/local
+
+## 闪电
+Host sd
+User ubuntu
+Hostname 123.206.96.78
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/sdkj
+##shandian2016
